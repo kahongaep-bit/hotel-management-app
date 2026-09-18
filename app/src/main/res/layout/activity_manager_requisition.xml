@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F7FAFC"
+    android:padding="12dp">
+
+    <!-- HEADER NA BADILI PASSWORD -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DASHBOARD YA HOTEL MANAGER"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#2C5282" />
+
+        <Button
+            android:id="@+id/btnResetPassword"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔑 BADILI PASSWORD"
+            android:textColor="#D69E2E"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- VITUFE VYA HARAKA (MAIN STORE, SUB-STORE & LIVE SALES) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <!-- Kitufe cha Stoo Kuu -->
+        <Button
+            android:id="@+id/btnCheckMainStore"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="🏪 Stoo Kuu"
+            android:textSize="10sp"
+            android:backgroundTint="#805AD5"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="2dp" />
+
+        <!-- Kitufe cha Stoo ya Hoteli (Sub-Store) -->
+        <Button
+            android:id="@+id/btnCheckSubStore"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="📦 Stoo Hoteli"
+            android:textSize="10sp"
+            android:backgroundTint="#2B6CB0"
+            android:textColor="#FFFFFF"
+            android:layout_marginHorizontal="2dp" />
+
+        <!-- Kitufe cha Live Sales -->
+        <Button
+            android:id="@+id/btnViewLiveSales"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="📊 Sales &amp; Benki"
+            android:textSize="10sp"
+            android:backgroundTint="#2F855A"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="2dp" />
+    </LinearLayout>
+
+    <!-- FOMU YA KUANDIKA OMBI JIPYA (DRAFT FORM) -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📝 Tengeneza Orodha ya Maombi ya Stoki"
+                android:textStyle="bold"
+                android:textColor="#2D3748"
+                android:layout_marginBottom="6dp" />
+
+            <!-- JINA LA KITU -->
+            <EditText
+                android:id="@+id/etReqItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jina la Kitu (mfano: Vitunguu / Soda / Sabuni)"
+                android:textColorHint="#718096"
+                android:textColor="#1A202C"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <!-- IDADI -->
+                <EditText
+                    android:id="@+id/etReqQuantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Idadi / Kiasi"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="#718096"
+                    android:textColor="#1A202C"
+                    android:textSize="13sp"
+                    android:layout_marginEnd="4dp" />
+
+                <!-- KIPIMO -->
+                <EditText
+                    android:id="@+id/etReqUnit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Kipimo (Kilo, Lita, Chupa)"
+                    android:textColorHint="#718096"
+                    android:textColor="#1A202C"
+                    android:textSize="13sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- KUCHAGUA IDARA YA KUTUMIA KITU -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Idara:"
+                    android:textColor="#4A5568"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp" />
+
+                <Spinner
+                    android:id="@+id/spReqDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- RATIO YA MATUMIZI YA ODA (JIKONI PEKEE) -->
+            <EditText
+                android:id="@+id/etReqRatioPerOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Inatumika kwa Oda ngapi? (mfano: 4)"
+                android:inputType="numberDecimal"
+                android:textColorHint="#718096"
+                android:textColor="#1A202C"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnAddReqToDraft"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="+ Weka Kwenye Rasimu"
+                android:backgroundTint="#3182CE"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ORODHA YA RASIMU NA KITUFE CHA KUTUMA KWA PRODUCTION -->
+    <LinearLayout
+        android:id="@+id/layoutDraftContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Orodha ya Rasimu (Bado Haijatumwa):"
+            android:textStyle="bold"
+            android:textColor="#DD6B20"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/llDraftItemsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#EDF2F7"
+            android:padding="6dp"
+            android:layout_marginBottom="6dp" />
+
+        <Button
+            android:id="@+id/btnSendAllRequisitions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚀 TUMA MAOMBI YOTE KWA PRODUCTION"
+            android:backgroundTint="#38A169"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- HISTORIA YA MAOMBI -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historia ya Maombi Iliyotumwa:"
+        android:textStyle="bold"
+        android:textColor="#4A5568"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRequisitionsHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+</LinearLayout>

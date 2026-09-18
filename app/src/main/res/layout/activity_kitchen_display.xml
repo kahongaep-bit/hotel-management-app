@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1E293B"
+    android:padding="16dp">
+
+    <!-- Kichwa na Kitufe cha Password -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KITCHEN COUNTER"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/tvKitchenStaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mpishi Zamu Hii: - "
+                android:textSize="14sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnKitchenPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔑 Password"
+            android:backgroundTint="#D97706"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Eneo la Kutafuta Token -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp">
+
+        <EditText
+            android:id="@+id/etSearchKitchenToken"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Tafuta Token / Mteja"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#94A3B8"/>
+
+        <Button
+            android:id="@+id/btnSearchKitchen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tafuta"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#F97316"/>
+    </LinearLayout>
+
+    <!-- Vifungo vya Makabidhiano, Taarifa ya Mauzo na Mchanganuo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/btnKitchenHandover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📋 Makabidhiano"
+            android:textSize="11sp"
+            android:backgroundTint="#2563EB"
+            android:layout_marginEnd="2dp"/>
+
+        <Button
+            android:id="@+id/btnKitchenBreakdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📊 Mchanganuo"
+            android:textSize="11sp"
+            android:backgroundTint="#3182CE"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"/>
+
+        <Button
+            android:id="@+id/btnKitchenSalesReport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📈 Mauzo"
+            android:textSize="11sp"
+            android:backgroundTint="#16A34A"
+            android:layout_marginStart="2dp"/>
+    </LinearLayout>
+
+    <!-- Orodha ya Oda za Jiko -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKitchenOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"/>
+
+</LinearLayout>

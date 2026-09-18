@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/tvHistoryItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jina la Bidhaa"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#2D3748" />
+
+        <TextView
+            android:id="@+id/tvHistoryDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kiasi: 0.0"
+            android:textSize="12sp"
+            android:textColor="#4A5568" />
+
+        <TextView
+            android:id="@+id/tvHistoryStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: Pending"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#DD6B20"
+            android:layout_marginTop="2dp" />
+
+        <!-- CONTAINER YA SABABU ZA KURUDISHWA NA PRODUCTION -->
+        <LinearLayout
+            android:id="@+id/llRejectionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFF5F5"
+            android:padding="8dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvRejectionComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💬 Sababu za Kurudishwa..."
+                android:textColor="#C53030"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- VITUFE VYA KUHARIRI NA KUFUTA (VINAONEKANA VIKIWA REJECTED PEKEE) -->
+        <LinearLayout
+            android:id="@+id/llActionButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btnEditRequisition"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="✏️ REKEBISHA &amp; TUMA TENA"
+                android:textSize="10sp"
+                android:backgroundTint="#3182CE"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnDeleteRequisition"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="🗑️ FUTA OMBI"
+                android:textSize="10sp"
+                android:backgroundTint="#E53E3E"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#FAF8F5"
+    android:padding="24dp">
+
+    <!-- Logo ya Sheba Imezidishwa Ukubwa ili Isomeke Vizuri -->
+    <ImageView
+        android:layout_width="260dp"
+        android:layout_height="150dp"
+        android:src="@drawable/sheba_logo"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Sheba Logo" />
+
+    <!-- Jina la App chini ya Logo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#5B2C6F"
+        android:letterSpacing="0.05"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOTEL MANAGEMENT SYSTEM"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#718096"
+        android:letterSpacing="0.03"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Jina la Mtumiaji / Email Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jina la Mtumiaji au Email"
+        android:textColorHint="#718096"
+        app:hintTextColor="#5B2C6F"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeColor="#5B2C6F"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="#1A202C"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Field yenye Jicho la Kuchungulia -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nenosiri (Password)"
+        android:textColorHint="#718096"
+        app:hintTextColor="#5B2C6F"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeColor="#5B2C6F"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#718096"
+        android:layout_marginBottom="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#1A202C"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Kitufe cha INGIA KATIKA MFUMO -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="INGIA KATIKA MFUMO"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:backgroundTint="#5B2C6F"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="12dp" />
+
+    <!-- Kitaili cha Mzunguko wakati wa Kuprocess Login -->
+    <ProgressBar
+        android:id="@+id/progressBarLogin"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>

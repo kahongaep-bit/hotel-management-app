@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F7FAFC"
+    android:padding="6dp">
+
+    <!-- SEHEMU YA JUU: MENU YA BIDHAA NA FILTER CATEGORIES (50% YA SKRINI) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#EDF2F7"
+        android:padding="8dp"
+        android:layout_marginBottom="6dp">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="6dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnFilterAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="ZOTE"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#4A5568"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnFilterFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="VYAKULA"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#3182CE"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnFilterDrinks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="VINYWAJI"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#DD6B20"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnFilterRooms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="VYUMBA"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#2F855A"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnFilterHalls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="KUMBI"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#6B46C1"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMenuItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+    <!-- SEHEMU YA CHINI: DASHBOARD YA MAUZO & ORDER CART (50% YA SKRINI) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- KUSHOTO CHINI: DASHBOARD YA MAUZO NA BENKI -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:orientation="vertical"
+            android:paddingEnd="6dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊 RIPOTI YA MAUZO YA LEO"
+                        android:textColor="#2D3748"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
+
+                    <!-- CASH SALES -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="💵 Cash Total:"
+                            android:textColor="#4A5568"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvCashSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#2F855A"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- LIPA NAMBA SALES -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="📱 Lipa Namba:"
+                            android:textColor="#4A5568"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvLipaNambaSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#2B6CB0"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" />
+
+                    <!-- JUMLA YA MAUZO YOTE (GROSS TOTAL) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="📈 Jumla Mauzo:"
+                            android:textColor="#1A202C"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvGrossTotalSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#C53030"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- PESA ILIYOWEKWA BENKI (ID IMEUNGANISHWA SAHIHI NA KOTI ZA KOTLIN) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🏦 Iliyokwenda Benki:"
+                            android:textColor="#4A5568"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvBankDepositedSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#6B46C1"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- SALIO HALISI LILILOBAKI / BALANCE (ID IMEUNGANISHWA SAHIHI NA KOTI ZA KOTLIN) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="💰 Balance (Iliyopo):"
+                            android:textColor="#1A202C"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvNetBalanceSales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#D69E2E"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnCashierBankDeposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="🏦 WEKA BENKI"
+                        android:backgroundTint="#2D3748"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="6dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <Button
+                    android:id="@+id/btnSpecialOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:text="➕ SPECIAL"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#D69E2E"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnRejectedOrders"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:text="❌ REJECTED"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#E53E3E"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- BUTTON YA MCHANGANUO WA MAUZO -->
+            <Button
+                android:id="@+id/btnCategoryBreakdown"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="📋 MCHANGANUO WA MAUZO"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:backgroundTint="#3182CE"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- KULIA CHINI: CART YA ODA MPYA -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛒 ODA MPYA (CART)"
+                android:textColor="#1A202C"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCartItems"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/etCustomerName"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:hint="Jina la Mteja / Meza"
+                android:textColorHint="#A0AEC0"
+                android:textColor="#1A202C"
+                android:textSize="11sp"
+                android:background="#EDF2F7"
+                android:paddingStart="8dp"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="JUMLA YOTE:"
+                    android:textColor="#4A5568"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCartTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TSH 0"
+                    android:textColor="#2F855A"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPlaceOrder"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="LIPA NA ZALISHA"
+                android:backgroundTint="#38A169"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
