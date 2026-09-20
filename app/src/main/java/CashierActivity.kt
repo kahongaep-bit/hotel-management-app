@@ -56,7 +56,7 @@ class CashierActivity : AppCompatActivity() {
     private var activeResubmittingOrderId: String? = null
     private var originalRejectedAmount: Double = 0.0
 
-    private val BASE_URL = ("https://hotel-backend-production-d71e.up.railway.app/")
+    private val BASE_URL = ("https://hotel-backend-production-617c.up.railway.app/")
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()

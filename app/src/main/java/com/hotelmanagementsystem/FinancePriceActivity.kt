@@ -50,7 +50,7 @@ class FinancePriceActivity : AppCompatActivity() {
 
     private val apiService: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://hotel-backend-production-d71e.up.railway.app/")
+            .baseUrl("https://hotel-backend-production-617c.up.railway.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
