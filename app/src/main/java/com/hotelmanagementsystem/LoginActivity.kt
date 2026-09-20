@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         progressBarLogin = findViewById(R.id.progressBarLogin)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.32.78.51:5000/")
+            .baseUrl("https://hotel-backend-production-d71e.up.railway.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

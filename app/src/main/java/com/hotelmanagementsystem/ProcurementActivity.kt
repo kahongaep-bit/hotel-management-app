@@ -52,7 +52,7 @@ class ProcurementActivity : AppCompatActivity() {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://10.32.78.51:5000/")
+            .baseUrl("https://hotel-backend-production-d71e.up.railway.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

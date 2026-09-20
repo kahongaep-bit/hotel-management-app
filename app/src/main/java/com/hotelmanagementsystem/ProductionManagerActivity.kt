@@ -31,7 +31,7 @@ class ProductionManagerActivity : AppCompatActivity() {
 
     private val apiService: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("http://10.32.78.51:5000/")
+            .baseUrl("https://hotel-backend-production-d71e.up.railway.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
@@ -429,7 +429,7 @@ class ProductionManagerActivity : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
 
-        val fullUrl = "http://10.32.78.51:5000$endpoint"
+        val fullUrl = "https://hotel-backend-production-d71e.up.railway.app$endpoint"
         val client = okhttp3.OkHttpClient()
         val request = okhttp3.Request.Builder().url(fullUrl).build()
 
