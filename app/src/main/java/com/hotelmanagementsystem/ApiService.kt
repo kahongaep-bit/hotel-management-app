@@ -82,6 +82,14 @@ data class ShiftHandoverRecord(
     val handed_over_at: String = ""
 )
 
+// Data class mpya maalum kwa ajili ya kuongeza au kusimamia watumiaji kwenye Admin panel
+data class AddUserRequest(
+    val full_name: String,
+    val email: String,
+    val password: String,
+    val role: String
+)
+
 interface ApiService {
 
     // AUTHENTICATION & USERS
@@ -93,6 +101,22 @@ interface ApiService {
 
     @POST("api/users/reset-password")
     fun resetPassword(@Body body: HashMap<String, Any>): Call<GenericResponse>
+
+    // ADMIN MANAGEMENT ENDPOINTS
+    @GET("api/admin/users")
+    fun getAllUsers(): Call<List<UserData>>
+
+    @POST("api/admin/users")
+    fun addNewUser(@Body request: AddUserRequest): Call<GenericResponse>
+
+    @PUT("api/admin/users/{id}/role")
+    fun updateUserRole(
+        @Path("id") id: Int,
+        @Body roleData: HashMap<String, String>
+    ): Call<GenericResponse>
+
+    @DELETE("api/admin/users/{id}")
+    fun deleteUser(@Path("id") id: Int): Call<GenericResponse>
 
     // SHIFT HANDOVER (BAR & OTHER DEPARTMENTS)
     @POST("api/bar/handover")
@@ -158,7 +182,6 @@ interface ApiService {
     ): Call<GenericResponse>
 
     // DASHBOARD & REPORTS
-    // Endpoint ya daily sales iweze kupokea tarehe kama inahitajika au kuhakikisha server inachuja ya leo
     @GET("api/finance/daily-sales")
     fun getDailySales(
         @Query("date") date: String? = null
