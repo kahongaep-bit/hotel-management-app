@@ -27,6 +27,7 @@ class CashierActivity : AppCompatActivity() {
     private lateinit var tvTotalDeposited: TextView
     private lateinit var tvBalance: TextView
     private lateinit var btnCashierBankDeposit: Button
+    private lateinit var btnChangePassword: Button
 
     private lateinit var btnFilterAll: Button
     private lateinit var btnFilterFood: Button
@@ -77,6 +78,7 @@ class CashierActivity : AppCompatActivity() {
         tvBalance = findViewById(R.id.tvNetBalanceSales)
 
         btnCashierBankDeposit = findViewById(R.id.btnCashierBankDeposit)
+        btnChangePassword = findViewById(R.id.btnChangePassword)
         rvMenuItems = findViewById(R.id.rvMenuItems)
 
         rvCartItems = findViewById(R.id.rvCartItems)
@@ -103,8 +105,8 @@ class CashierActivity : AppCompatActivity() {
         rvCartItems.adapter = cartAdapter
 
         btnCashierBankDeposit.setOnClickListener { showCategorizedDepositDialog() }
+        btnChangePassword.setOnClickListener { showChangePasswordDialog() }
 
-        // MAREKEBISHO HAPA: Kitendo cha kubonyeza kitufe cha kutuma au kubadilisha oda
         btnPlaceOrder.setOnClickListener {
             showPaymentMethodDialog()
         }
@@ -130,6 +132,76 @@ class CashierActivity : AppCompatActivity() {
     private fun loadAllCashierData() {
         fetchCashierSummary()
         fetchMenuItemsFromDatabase()
+    }
+
+    private fun showChangePasswordDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("🔑 Badilisha Nenosiri (Password)")
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(40, 30, 40, 20)
+        }
+
+        val etEmail = EditText(this).apply {
+            hint = "Weka Barua Pepe (Email) Yako"
+            inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+        }
+
+        val etCurrentPassword = EditText(this).apply {
+            hint = "Password ya Sasa"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+
+        val etNewPassword = EditText(this).apply {
+            hint = "Password Mpya"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+
+        layout.addView(etEmail)
+        layout.addView(etCurrentPassword)
+        layout.addView(etNewPassword)
+        builder.setView(layout)
+
+        builder.setPositiveButton("BADILISHA") { dialog, _ ->
+            val email = etEmail.text.toString().trim()
+            val oldPass = etCurrentPassword.text.toString().trim()
+            val newPass = etNewPassword.text.toString().trim()
+
+            if (email.isEmpty() || oldPass.isEmpty() || newPass.isEmpty()) {
+                Toast.makeText(this, "Tafadhali jaza sehemu zote!", Toast.LENGTH_SHORT).show()
+                return@setPositiveButton
+            }
+
+            updatePasswordInServer(email, oldPass, newPass)
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("GHAIRI", null)
+        builder.show()
+    }
+
+    private fun updatePasswordInServer(email: String, oldPass: String, newPass: String) {
+        val apiService = getRetrofit().create(ApiService::class.java)
+        val requestData = hashMapOf<String, Any>(
+            "email" to email,
+            "old_password" to oldPass,
+            "new_password" to newPass
+        )
+
+        apiService.changePassword(requestData).enqueue(object : Callback<GenericResponse> {
+            override fun onResponse(call: Call<GenericResponse>, response: Response<GenericResponse>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@CashierActivity, "Password imebadilishwa kikamilifu!", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@CashierActivity, "Imeshindikana! Hakiki Email au Password ya sasa.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                Toast.makeText(this@CashierActivity, "Hitilafu ya mtandao: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showCategoryBreakdownDialog() {

@@ -120,14 +120,34 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="📊 RIPOTI YA MAUZO YA LEO"
-                        android:textColor="#2D3748"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="6dp" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="6dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="📊 RIPOTI YA MAUZO YA LEO"
+                            android:textColor="#2D3748"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <!-- KITUFE CHA KUBADILI PASSWORD -->
+                        <Button
+                            android:id="@+id/btnChangePassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:text="🔑 Password"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="#718096"
+                            android:textColor="#FFFFFF"
+                            android:paddingHorizontal="6dp" />
+                    </LinearLayout>
 
                     <!-- CASH SALES -->
                     <LinearLayout
@@ -214,7 +234,7 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- PESA ILIYOWEKWA BENKI (ID IMEUNGANISHWA SAHIHI NA KOTI ZA KOTLIN) -->
+                    <!-- PESA ILIYOWEKWA BENKI -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -240,7 +260,7 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- SALIO HALISI LILILOBAKI / BALANCE (ID IMEUNGANISHWA SAHIHI NA KOTI ZA KOTLIN) -->
+                    <!-- SALIO HALISI LILILOBAKI / BALANCE -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

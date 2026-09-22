@@ -72,6 +72,10 @@ class LoginActivity : AppCompatActivity() {
 
                     // USOMAJI WA ROLES NA UTELEKEZAJI WA SCREEN SAHIHI:
                     when {
+                        // 0. ADMIN / SYSTEM ADMIN
+                        roleNormalized.contains("admin") -> {
+                            startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
+                        }
                         // 1. MHASIBU / FINANCE
                         roleNormalized.contains("finance") || roleNormalized.contains("mhasibu") -> {
                             startActivity(Intent(this@LoginActivity, FinancePriceActivity::class.java))
@@ -104,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
                         roleNormalized.contains("production") -> {
                             startActivity(Intent(this@LoginActivity, ProductionManagerActivity::class.java))
                         }
-                        // ADMIN AU ROLE NYINGINE
+                        // ROLE NYINGINE YOYOTE
                         else -> {
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         }
