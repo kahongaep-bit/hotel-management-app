@@ -136,7 +136,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <!-- KITUFE CHA KUBADILI PASSWORD -->
+                        <!-- KITUFE CHA KUBADILI PASSWORD KIMEKAA JUU KISRAFU -->
                         <Button
                             android:id="@+id/btnChangePassword"
                             android:layout_width="wrap_content"
@@ -260,7 +260,66 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- SALIO HALISI LILILOBAKI / BALANCE -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" />
+
+                    <!-- 1. BALANCE YA LEO -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="💰 Balance ya Leo:"
+                            android:textColor="#2D3748"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvTodayBalance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#3182CE"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 2. BALANCE ILIYOPITA (CARRY FORWARD) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🔄 Balance Iliyopita:"
+                            android:textColor="#4A5568"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPreviousBalance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TSH 0"
+                            android:textColor="#D69E2E"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 3. JUMLA YA BALANCE (NET TOTAL) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -271,17 +330,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="💰 Balance (Iliyopo):"
+                            android:text="⭐ Jumla ya Balance:"
                             android:textColor="#1A202C"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tvNetBalanceSales"
+                            android:id="@+id/tvTotalBalance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TSH 0"
-                            android:textColor="#D69E2E"
+                            android:textColor="#2F855A"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>

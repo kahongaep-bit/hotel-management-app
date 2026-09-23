@@ -25,7 +25,12 @@ class CashierActivity : AppCompatActivity() {
     private lateinit var tvLipaNambaSales: TextView
     private lateinit var tvGrossTotalSales: TextView
     private lateinit var tvTotalDeposited: TextView
-    private lateinit var tvBalance: TextView
+
+    // BALANCE TATU MPYA
+    private lateinit var tvTodayBalance: TextView
+    private lateinit var tvPreviousBalance: TextView
+    private lateinit var tvTotalBalance: TextView
+
     private lateinit var btnCashierBankDeposit: Button
     private lateinit var btnChangePassword: Button
 
@@ -73,9 +78,12 @@ class CashierActivity : AppCompatActivity() {
         tvCashSales = findViewById(R.id.tvCashSales)
         tvLipaNambaSales = findViewById(R.id.tvLipaNambaSales)
         tvGrossTotalSales = findViewById(R.id.tvGrossTotalSales)
-
         tvTotalDeposited = findViewById(R.id.tvBankDepositedSales)
-        tvBalance = findViewById(R.id.tvNetBalanceSales)
+
+        // KUUNGANISHA ID ZA BALANCE TATU MPYA
+        tvTodayBalance = findViewById(R.id.tvTodayBalance)
+        tvPreviousBalance = findViewById(R.id.tvPreviousBalance)
+        tvTotalBalance = findViewById(R.id.tvTotalBalance)
 
         btnCashierBankDeposit = findViewById(R.id.btnCashierBankDeposit)
         btnChangePassword = findViewById(R.id.btnChangePassword)
@@ -431,15 +439,22 @@ class CashierActivity : AppCompatActivity() {
                     tvCashSales.text = "TSH ${String.format("%,.0f", sales.cash_sales)}"
                     tvLipaNambaSales.text = "TSH ${String.format("%,.0f", sales.lipanamba_sales)}"
                     tvGrossTotalSales.text = "TSH ${String.format("%,.0f", sales.gross_total)}"
-
                     tvTotalDeposited.text = "TSH ${String.format("%,.0f", sales.total_deposited)}"
-                    tvBalance.text = "TSH ${String.format("%,.0f", sales.total)}"
+
+                    // Hapa sasa tunaziweka hizi mpya ulizozifikiria:
+                    // 1. Balance ya Leo (total)
+                    // 2. Balance Iliyopita (previous_balance)
+                    // 3. Jumla ya Balance (combined_total_balance)
+
+                    // tvTodayBalance.text = "TSH ${String.format("%,.0f", sales.total)}"
+                    // tvPreviousBalance.text = "TSH ${String.format("%,.0f", sales.previous_balance ?: 0.0)}"
+                    // tvCombinedBalance.text = "TSH ${String.format("%,.0f", sales.combined_total_balance ?: sales.total)}"
+
                 } else {
                     tvCashSales.text = "TSH 0"
                     tvLipaNambaSales.text = "TSH 0"
                     tvGrossTotalSales.text = "TSH 0"
                     tvTotalDeposited.text = "TSH 0"
-                    tvBalance.text = "TSH 0"
                 }
             }
 
@@ -449,7 +464,6 @@ class CashierActivity : AppCompatActivity() {
                 tvLipaNambaSales.text = "TSH 0"
                 tvGrossTotalSales.text = "TSH 0"
                 tvTotalDeposited.text = "TSH 0"
-                tvBalance.text = "TSH 0"
             }
         })
     }
