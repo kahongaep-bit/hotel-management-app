@@ -32,7 +32,11 @@ data class DailySalesResponse(
     val gross_total: Double = 0.0,
     val cash_sales: Double = 0.0,
     val lipanamba_sales: Double = 0.0,
-    val total_deposited: Double = 0.0
+    val total_deposited: Double = 0.0,
+    // BALANCE TATU MPYA (Leo / Iliyopita / Jumla) - zinazotolewa na server
+    val today_balance: Double = 0.0,
+    val previous_balance: Double = 0.0,
+    val balance: Double = 0.0
 )
 
 data class CategoryBreakdownResponse(

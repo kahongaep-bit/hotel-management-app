@@ -343,7 +343,8 @@ class CashierActivity : AppCompatActivity() {
                         Toast.makeText(this@CashierActivity, "Oda imebadilishwa na kutumwa tena!", Toast.LENGTH_LONG).show()
                         resetCartAndState()
                     } else {
-                        Toast.makeText(this@CashierActivity, "Imeshindikana kusasisha oda.", Toast.LENGTH_SHORT).show()
+                        val errorMsg = response.errorBody()?.string() ?: "Imeshindikana kusasisha oda."
+                        Toast.makeText(this@CashierActivity, errorMsg, Toast.LENGTH_LONG).show()
                     }
                 }
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
@@ -358,6 +359,9 @@ class CashierActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@CashierActivity, "Oda imelipwa ($paymentMethod) na kutumwa!", Toast.LENGTH_LONG).show()
                         resetCartAndState()
+                    } else {
+                        val errorMsg = response.errorBody()?.string() ?: "Imeshindikana kuhifadhi mauzo."
+                        Toast.makeText(this@CashierActivity, errorMsg, Toast.LENGTH_LONG).show()
                     }
                 }
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
@@ -441,20 +445,18 @@ class CashierActivity : AppCompatActivity() {
                     tvGrossTotalSales.text = "TSH ${String.format("%,.0f", sales.gross_total)}"
                     tvTotalDeposited.text = "TSH ${String.format("%,.0f", sales.total_deposited)}"
 
-                    // Hapa sasa tunaziweka hizi mpya ulizozifikiria:
-                    // 1. Balance ya Leo (total)
-                    // 2. Balance Iliyopita (previous_balance)
-                    // 3. Jumla ya Balance (combined_total_balance)
-
-                    // tvTodayBalance.text = "TSH ${String.format("%,.0f", sales.total)}"
-                    // tvPreviousBalance.text = "TSH ${String.format("%,.0f", sales.previous_balance ?: 0.0)}"
-                    // tvCombinedBalance.text = "TSH ${String.format("%,.0f", sales.combined_total_balance ?: sales.total)}"
-
+                    // BALANCE TATU MPYA (Leo / Iliyopita / Jumla)
+                    tvTodayBalance.text = "TSH ${String.format("%,.0f", sales.today_balance)}"
+                    tvPreviousBalance.text = "TSH ${String.format("%,.0f", sales.previous_balance)}"
+                    tvTotalBalance.text = "TSH ${String.format("%,.0f", sales.balance)}"
                 } else {
                     tvCashSales.text = "TSH 0"
                     tvLipaNambaSales.text = "TSH 0"
                     tvGrossTotalSales.text = "TSH 0"
                     tvTotalDeposited.text = "TSH 0"
+                    tvTodayBalance.text = "TSH 0"
+                    tvPreviousBalance.text = "TSH 0"
+                    tvTotalBalance.text = "TSH 0"
                 }
             }
 
@@ -464,6 +466,9 @@ class CashierActivity : AppCompatActivity() {
                 tvLipaNambaSales.text = "TSH 0"
                 tvGrossTotalSales.text = "TSH 0"
                 tvTotalDeposited.text = "TSH 0"
+                tvTodayBalance.text = "TSH 0"
+                tvPreviousBalance.text = "TSH 0"
+                tvTotalBalance.text = "TSH 0"
             }
         })
     }

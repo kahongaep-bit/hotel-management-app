@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
 
         apiService?.loginUser(request)?.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (isFinishing || isDestroyed) return
                 progressBarLogin.visibility = View.GONE
                 btnLogin.isEnabled = true
 
@@ -70,48 +71,17 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(this@LoginActivity, "Umeingia kama: $role", Toast.LENGTH_SHORT).show()
 
-                    // USOMAJI WA ROLES NA UTELEKEZAJI WA SCREEN SAHIHI:
                     when {
-                        // 0. ADMIN / SYSTEM ADMIN
-                        roleNormalized.contains("admin") -> {
-                            startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
-                        }
-                        // 1. MHASIBU / FINANCE
-                        roleNormalized.contains("finance") || roleNormalized.contains("mhasibu") -> {
-                            startActivity(Intent(this@LoginActivity, FinancePriceActivity::class.java))
-                        }
-                        // 2. CASHIER
-                        roleNormalized.contains("cashier") || roleNormalized.contains("mweka_hazina") -> {
-                            startActivity(Intent(this@LoginActivity, CashierActivity::class.java))
-                        }
-                        // 3. HOTEL MANAGER
-                        roleNormalized.contains("manager") -> {
-                            startActivity(Intent(this@LoginActivity, ManagerRequisitionActivity::class.java))
-                        }
-                        // 4. PRINCIPAL / MKUU WA CHUO
-                        roleNormalized.contains("principal") || roleNormalized.contains("mkuu") -> {
-                            startActivity(Intent(this@LoginActivity, PrincipalDashboardActivity::class.java))
-                        }
-                        // 5. BARTENDER / BAR
-                        roleNormalized.contains("bar") || roleNormalized.contains("bartender") -> {
-                            startActivity(Intent(this@LoginActivity, BartenderActivity::class.java))
-                        }
-                        // 6. JIKONI / KITCHEN
-                        roleNormalized.contains("kitchen") || roleNormalized.contains("jikoni") -> {
-                            startActivity(Intent(this@LoginActivity, KitchenActivity::class.java))
-                        }
-                        // 7. PROCUREMENT / MANUNUZI
-                        roleNormalized.contains("procurement") -> {
-                            startActivity(Intent(this@LoginActivity, ProcurementActivity::class.java))
-                        }
-                        // 8. PRODUCTION MANAGER
-                        roleNormalized.contains("production") -> {
-                            startActivity(Intent(this@LoginActivity, ProductionManagerActivity::class.java))
-                        }
-                        // ROLE NYINGINE YOYOTE
-                        else -> {
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        }
+                        roleNormalized.contains("admin") -> startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
+                        roleNormalized.contains("finance") || roleNormalized.contains("mhasibu") -> startActivity(Intent(this@LoginActivity, FinancePriceActivity::class.java))
+                        roleNormalized.contains("cashier") || roleNormalized.contains("mweka_hazina") -> startActivity(Intent(this@LoginActivity, CashierActivity::class.java))
+                        roleNormalized.contains("manager") -> startActivity(Intent(this@LoginActivity, ManagerRequisitionActivity::class.java))
+                        roleNormalized.contains("principal") || roleNormalized.contains("mkuu") -> startActivity(Intent(this@LoginActivity, PrincipalDashboardActivity::class.java))
+                        roleNormalized.contains("bar") || roleNormalized.contains("bartender") -> startActivity(Intent(this@LoginActivity, BartenderActivity::class.java))
+                        roleNormalized.contains("kitchen") || roleNormalized.contains("jikoni") -> startActivity(Intent(this@LoginActivity, KitchenActivity::class.java))
+                        roleNormalized.contains("procurement") -> startActivity(Intent(this@LoginActivity, ProcurementActivity::class.java))
+                        roleNormalized.contains("production") -> startActivity(Intent(this@LoginActivity, ProductionManagerActivity::class.java))
+                        else -> startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     }
                     finish()
                 } else {
@@ -120,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                if (isFinishing || isDestroyed) return
                 progressBarLogin.visibility = View.GONE
                 btnLogin.isEnabled = true
                 Toast.makeText(this@LoginActivity, "Hitilafu ya Mtandao: ${t.message}", Toast.LENGTH_SHORT).show()

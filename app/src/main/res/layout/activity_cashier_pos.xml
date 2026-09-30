@@ -7,7 +7,7 @@
     android:background="#F7FAFC"
     android:padding="6dp">
 
-    <!-- SEHEMU YA JUU: MENU YA BIDHAA NA FILTER CATEGORIES (50% YA SKRINI) -->
+    <!-- SEHEMU YA JUU: MENU YA BIDHAA NA FILTER CATEGORIES + KITUFE CHA PASSWORD -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -17,72 +17,93 @@
         android:padding="8dp"
         android:layout_marginBottom="6dp">
 
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginBottom="6dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:scrollbars="none">
 
-                <Button
-                    android:id="@+id/btnFilterAll"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="ZOTE"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#4A5568"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginEnd="6dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnFilterFood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="VYAKULA"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#3182CE"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginEnd="6dp" />
+                    <Button
+                        android:id="@+id/btnFilterAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="ZOTE"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#4A5568"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginEnd="6dp" />
 
-                <Button
-                    android:id="@+id/btnFilterDrinks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="VINYWAJI"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#DD6B20"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginEnd="6dp" />
+                    <Button
+                        android:id="@+id/btnFilterFood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="VYAKULA"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#3182CE"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginEnd="6dp" />
 
-                <Button
-                    android:id="@+id/btnFilterRooms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="VYUMBA"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#2F855A"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginEnd="6dp" />
+                    <Button
+                        android:id="@+id/btnFilterDrinks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="VINYWAJI"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#DD6B20"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginEnd="6dp" />
 
-                <Button
-                    android:id="@+id/btnFilterHalls"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:text="KUMBI"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="#6B46C1"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </HorizontalScrollView>
+                    <Button
+                        android:id="@+id/btnFilterRooms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="VYUMBA"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#2F855A"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginEnd="6dp" />
+
+                    <Button
+                        android:id="@+id/btnFilterHalls"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="KUMBI"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#6B46C1"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- KITUFE CHA KUBADILI PASSWORD KIMEWEKWA JUU KABISA PEMBENI YA FILTER -->
+            <Button
+                android:id="@+id/btnChangePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="🔑 Pass"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:backgroundTint="#718096"
+                android:textColor="#FFFFFF"
+                android:paddingHorizontal="8dp"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenuItems"
@@ -120,34 +141,14 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="6dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="📊 RIPOTI YA MAUZO YA LEO"
-                            android:textColor="#2D3748"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <!-- KITUFE CHA KUBADILI PASSWORD KIMEKAA JUU KISRAFU -->
-                        <Button
-                            android:id="@+id/btnChangePassword"
-                            android:layout_width="wrap_content"
-                            android:layout_height="28dp"
-                            android:text="🔑 Password"
-                            android:textSize="9sp"
-                            android:textStyle="bold"
-                            android:backgroundTint="#718096"
-                            android:textColor="#FFFFFF"
-                            android:paddingHorizontal="6dp" />
-                    </LinearLayout>
+                        android:text="📊 RIPOTI YA MAUZO YA LEO"
+                        android:textColor="#2D3748"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
 
                     <!-- CASH SALES -->
                     <LinearLayout
@@ -388,7 +389,6 @@
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
-            <!-- BUTTON YA MCHANGANUO WA MAUZO -->
             <Button
                 android:id="@+id/btnCategoryBreakdown"
                 android:layout_width="match_parent"

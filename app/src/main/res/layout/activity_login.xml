@@ -1,82 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#0F2C59"
+    android:background="#1B365D"
     android:padding="24dp">
 
-    <!-- LOGO YA VMCCC -->
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="130dp"
-        android:src="@drawable/vmccc_logo"
-        android:scaleType="fitCenter"
-        android:layout_marginBottom="24dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VMCCC HOTEL SYSTEM"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
-
-    <!-- CARD / BOX YA LOGIN -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#1E3E62"
-        android:padding="20dp"
-        android:elevation="8dp">
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Barua Pepe (Email)"
-            android:textColorHint="#94A3B8"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:background="#0F2C59"
-            android:paddingHorizontal="16dp"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="16dp" />
+        <!-- Logo ya VMCCC -->
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/vmccc_logo" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Nenosiri (Password)"
-            android:textColorHint="#94A3B8"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:background="#0F2C59"
-            android:paddingHorizontal="16dp"
-            android:inputType="textPassword"
-            android:layout_marginBottom="24dp" />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="INGIA KWENYE MFUMO"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:backgroundTint="#D4AF37" />
-
-        <ProgressBar
-            android:id="@+id/progressBarLogin"
+        <!-- Kichwa cha Habari -->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="32dp"
+            android:text="VMCCC HOTEL SYSTEM"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Kadi ya Kuandikia -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#233E6B"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Sehemu ya Email / Username -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="#B0C4DE"
+                    app:boxBackgroundColor="#1B365D"
+                    app:boxBackgroundMode="filled"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Barua Pepe (Email)"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Sehemu ya Password yenye Jicho -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:textColorHint="#B0C4DE"
+                    app:boxBackgroundColor="#1B365D"
+                    app:boxBackgroundMode="filled"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@android:color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nenosiri (Password)"
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Kitufe cha Kuingia kwenye Mfumo -->
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:backgroundTint="#E5C158"
+                    android:text="INGIA KWENYE MFUMO"
+                    android:textColor="#1B365D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
+                <!-- ProgressBar Iliyoongezwa ili kuondoa Crash -->
+                <ProgressBar
+                    android:id="@+id/progressBarLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
