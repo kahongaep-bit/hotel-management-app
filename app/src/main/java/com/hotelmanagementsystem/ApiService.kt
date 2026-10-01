@@ -33,7 +33,6 @@ data class DailySalesResponse(
     val cash_sales: Double = 0.0,
     val lipanamba_sales: Double = 0.0,
     val total_deposited: Double = 0.0,
-    // BALANCE TATU MPYA (Leo / Iliyopita / Jumla) - zinazotolewa na server
     val today_balance: Double = 0.0,
     val previous_balance: Double = 0.0,
     val balance: Double = 0.0
@@ -86,7 +85,6 @@ data class ShiftHandoverRecord(
     val handed_over_at: String = ""
 )
 
-// Data class mpya maalum kwa ajili ya kuongeza au kusimamia watumiaji kwenye Admin panel
 data class AddUserRequest(
     val full_name: String,
     val email: String,
@@ -94,9 +92,16 @@ data class AddUserRequest(
     val role: String
 )
 
+data class CustomerFeedbackItem(
+    val id: String?,
+    val customer_name: String?,
+    val rating: String?,
+    val comment: String?,
+    val created_at: String?
+)
+
 interface ApiService {
 
-    // AUTHENTICATION & USERS
     @POST("api/login")
     fun loginUser(@Body request: LoginRequest): Call<LoginResponse>
 
@@ -106,7 +111,6 @@ interface ApiService {
     @POST("api/users/reset-password")
     fun resetPassword(@Body body: HashMap<String, Any>): Call<GenericResponse>
 
-    // ADMIN MANAGEMENT ENDPOINTS
     @GET("api/admin/users")
     fun getAllUsers(): Call<List<UserData>>
 
@@ -122,14 +126,12 @@ interface ApiService {
     @DELETE("api/admin/users/{id}")
     fun deleteUser(@Path("id") id: Int): Call<GenericResponse>
 
-    // SHIFT HANDOVER (BAR & OTHER DEPARTMENTS)
     @POST("api/bar/handover")
     fun recordBarShiftHandover(@Body data: HashMap<String, Any>): Call<GenericResponse>
 
     @GET("api/bar/current-shift")
     fun getCurrentShiftInfo(@Query("department") department: String = "Bar"): Call<ShiftInfoResponse>
 
-    // PRODUCTS / MENU ITEMS
     @GET("api/products")
     fun getProducts(): Call<List<MenuItem>>
 
@@ -160,7 +162,6 @@ interface ApiService {
     @DELETE("api/menu/{id}")
     fun deleteMenuItem(@Path("id") id: String): Call<GenericResponse>
 
-    // ORDERS MANAGEMENT
     @POST("api/orders")
     fun sendOrder(@Body request: OrderRequest): Call<GenericResponse>
 
@@ -185,7 +186,6 @@ interface ApiService {
         @Body rejectData: HashMap<String, Any>
     ): Call<GenericResponse>
 
-    // DASHBOARD & REPORTS
     @GET("api/finance/daily-sales")
     fun getDailySales(
         @Query("date") date: String? = null
@@ -222,7 +222,6 @@ interface ApiService {
         @Query("endDate") endDate: String?
     ): Call<List<RequisitionItem>>
 
-    // REQUISITIONS
     @GET("api/requisitions")
     fun getRequisitions(): Call<List<RequisitionItem>>
 
@@ -250,7 +249,6 @@ interface ApiService {
         @Body data: HashMap<String, Any>
     ): Call<GenericResponse>
 
-    // STOCKS MANAGEMENT
     @GET("api/stock/main")
     fun getMainStockItems(): Call<List<StockItem>>
 
@@ -263,7 +261,6 @@ interface ApiService {
     @POST("api/stock/issue-substore")
     fun issueStockToSubStore(@Body issueData: HashMap<String, Any>): Call<GenericResponse>
 
-    // BANK DEPOSITS
     @POST("api/deposits")
     fun addDeposit(@Body depositData: HashMap<String, Any>): Call<GenericResponse>
 
@@ -272,5 +269,8 @@ interface ApiService {
 
     @POST("api/bar/handover")
     fun submitHandover(@Body handoverData: Map<String, @JvmSuppressWildcards Any>): Call<GenericResponse>
+
+    @GET("api/feedback")
+    fun getCustomerFeedback(): Call<List<CustomerFeedbackItem>>
 
 }

@@ -16,6 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Calendar
 
+
 class ProductionManagerActivity : AppCompatActivity() {
 
     private lateinit var rvPendingApprovals: RecyclerView
@@ -26,6 +27,7 @@ class ProductionManagerActivity : AppCompatActivity() {
     private lateinit var tvBankDeposit: TextView
     private lateinit var btnResetPassword: Button
     private lateinit var btnViewFinancialReports: Button
+    private lateinit var btnViewFeedback: Button
 
     private var pendingRequisitionsDialog: AlertDialog? = null
 
@@ -49,6 +51,7 @@ class ProductionManagerActivity : AppCompatActivity() {
         tvBankDeposit = findViewById(R.id.tvBankDeposit)
         btnResetPassword = findViewById(R.id.btnResetPassword)
         btnViewFinancialReports = findViewById(R.id.btnViewFinancialReports)
+        btnViewFeedback = findViewById(R.id.btnViewFeedback)
 
         rvPendingApprovals.layoutManager = LinearLayoutManager(this)
 
@@ -62,6 +65,8 @@ class ProductionManagerActivity : AppCompatActivity() {
         btnSubStore.setOnClickListener { showStockItemsDialog("Sub-Store (Hoteli)", "/api/stock/sub") }
 
         btnViewFinancialReports.setOnClickListener { showFinancialReportDialog() }
+        btnViewFeedback.setOnClickListener { showCustomerFeedbackDialog() }
+
         tvDailySales.setOnClickListener { showFinancialReportDialog() }
         tvBankDeposit.setOnClickListener { showFinancialReportDialog() }
 
@@ -145,6 +150,81 @@ class ProductionManagerActivity : AppCompatActivity() {
 
         builder.setNegativeButton("GHAIRI", null)
         builder.show()
+    }
+
+    private fun showCustomerFeedbackDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("💬 Maoni na Tathmini za Wateja")
+
+        val scrollView = ScrollView(this)
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(40, 30, 40, 30)
+            setBackgroundColor(Color.parseColor("#1E293B"))
+        }
+
+        val tvLoading = TextView(this).apply {
+            text = "⏳ Inapakua maoni ya wateja..."
+            setTextColor(Color.WHITE)
+            textSize = 13f
+        }
+        layout.addView(tvLoading)
+
+        scrollView.addView(layout)
+        builder.setView(scrollView)
+        builder.setPositiveButton("FUNGA", null)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        apiService.getCustomerFeedback().enqueue(object : Callback<List<CustomerFeedbackItem>> {
+            override fun onResponse(
+                call: Call<List<CustomerFeedbackItem>>,
+                response: Response<List<CustomerFeedbackItem>>
+            ) {
+                layout.removeAllViews()
+                val feedbackList = response.body() ?: emptyList()
+
+                if (feedbackList.isEmpty()) {
+                    val tvEmpty = TextView(this@ProductionManagerActivity).apply {
+                        text = "Hakuna maoni ya wateja yaliyosajiliwa kwasasa."
+                        setTextColor(Color.WHITE)
+                        textSize = 14f
+                    }
+                    layout.addView(tvEmpty)
+                } else {
+                    for ((index, item) in feedbackList.withIndex()) {
+                        val name = item.customer_name ?: "Mteja"
+                        val rating = item.rating ?: "⭐⭐⭐⭐⭐"
+                        val comment = item.comment ?: "Hakuna maoni ya maandishi."
+                        val date = item.created_at ?: ""
+
+                        val tvCard = TextView(this@ProductionManagerActivity).apply {
+                            text = """
+                                ${index + 1}. 👤 $name ($rating)
+                                💬 "$comment"
+                                📅 $date
+                                ──────────────────────────
+                            """.trimIndent()
+                            setTextColor(Color.parseColor("#E2E8F0"))
+                            textSize = 13f
+                            setPadding(0, 6, 0, 6)
+                        }
+                        layout.addView(tvCard)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<CustomerFeedbackItem>>, t: Throwable) {
+                layout.removeAllViews()
+                val tvErr = TextView(this@ProductionManagerActivity).apply {
+                    text = "Hitilafu ya kupakua maoni: ${t.message}"
+                    setTextColor(Color.parseColor("#FEB2B2"))
+                    textSize = 13f
+                }
+                layout.addView(tvErr)
+            }
+        })
     }
 
     private fun showFinancialReportDialog() {

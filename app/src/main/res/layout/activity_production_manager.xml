@@ -115,12 +115,12 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-        <!-- NAVIGATION BUTTONS -->
+        <!-- NAVIGATION BUTTONS (MSTARI WA 1: REFRESH, MAIN STORE, SUB-STORE) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="14dp">
+            android:layout_marginBottom="8dp">
 
             <Button
                 android:id="@+id/btnRefresh"
@@ -129,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="🔄 REFRESH"
-                android:textSize="11sp"
-                android:layout_marginEnd="4dp" />
+                android:textSize="10sp"
+                android:layout_marginEnd="3dp" />
 
             <Button
                 android:id="@+id/btnMainStore"
@@ -140,8 +140,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="#805AD5"
                 android:text="🏪 MAIN STORE"
-                android:textSize="11sp"
-                android:layout_marginEnd="4dp" />
+                android:textSize="10sp"
+                android:layout_marginHorizontal="3dp" />
 
             <Button
                 android:id="@+id/btnSubStore"
@@ -151,20 +151,41 @@
                 android:layout_weight="1"
                 android:backgroundTint="#3182CE"
                 android:text="📦 SUB-STORE"
-                android:textSize="11sp" />
+                android:textSize="10sp"
+                android:layout_marginStart="3dp" />
         </LinearLayout>
 
-        <!-- KITUFE CHA RIPOTI ZA FEDHA -->
-        <Button
-            android:id="@+id/btnViewFinancialReports"
-            style="@style/Widget.MaterialComponents.Button"
+        <!-- VITUFE VYA RIPOTI ZA FEDHA NA MAONI YA WATEJA -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#38A169"
-            android:text="📊 Angalia Ripoti za Fedha &amp; Benki"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="14dp" />
+            android:orientation="horizontal"
+            android:layout_marginBottom="14dp">
+
+            <Button
+                android:id="@+id/btnViewFinancialReports"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#38A169"
+                android:text="📊 Ripoti za Fedha"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnViewFeedback"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#DD6B20"
+                android:text="💬 Maoni ya Wateja"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
 
         <!-- HEADING YA MAOMBI -->
         <TextView
@@ -179,7 +200,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPendingApprovals"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 </ScrollView>

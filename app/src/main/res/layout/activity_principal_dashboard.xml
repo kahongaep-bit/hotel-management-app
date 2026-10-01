@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#F7FAFC"
     android:padding="16dp">
 
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="12dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -135,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#4A5568"
-                android:text="🔍 Tracking Maombi Yote"
+                android:text="🔍 Tracking Maombi"
                 android:textSize="11sp"
                 android:layout_marginEnd="4dp" />
 
@@ -146,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#2B6CB0"
-                android:text="📊 Ripoti ya Fedha (Filter)"
+                android:text="📊 Ripoti ya Fedha"
                 android:textSize="11sp"
                 android:layout_marginStart="4dp" />
         </LinearLayout>
@@ -164,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🛒 Bidhaa Zilizonunuliwa"
+                android:text="🛒 Manunuzi"
                 android:textSize="11sp"
                 android:layout_marginEnd="4dp" />
 
@@ -174,39 +175,50 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="📤 Bidhaa Zilizotolewa Stoo"
+                android:text="📤 Toka Stoo"
                 android:textSize="11sp"
                 android:layout_marginStart="4dp" />
         </LinearLayout>
 
-        <!-- Stoo Kuu na Sub-Store Iliyounganishwa Sawa na Procurement -->
+        <!-- Stoo Kuu, Sub-Store na Maoni ya Wateja -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="14dp">
 
             <Button
                 android:id="@+id/btnViewMainStore"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
-                android:backgroundTint="#4A5568"
+                android:backgroundTint="#805AD5"
                 android:text="📦 Stoo Kuu"
-                android:textSize="12sp"
-                android:layout_marginEnd="4dp" />
+                android:textSize="10sp"
+                android:layout_marginEnd="3dp" />
 
             <Button
                 android:id="@+id/btnViewSubStore"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:backgroundTint="#3182CE"
                 android:text="🏢 Sub-Store"
-                android:textSize="12sp"
-                android:layout_marginStart="4dp" />
+                android:textSize="10sp"
+                android:layout_marginHorizontal="3dp" />
+
+            <Button
+                android:id="@+id/btnViewFeedback"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DD6B20"
+                android:text="💬 Maoni"
+                android:textSize="10sp"
+                android:layout_marginStart="3dp" />
         </LinearLayout>
 
         <!-- Sehemu ya Idhini za Mwisho za Manunuzi -->
@@ -215,14 +227,15 @@
             android:layout_height="wrap_content"
             android:text="Manunuzi Yanayosubiri Idhini ya Mwisho (Final Approvals):"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textColor="#4A5568"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="6dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPrincipalApprovals"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="280dp"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 </ScrollView>

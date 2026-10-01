@@ -23,12 +23,13 @@ class PrincipalDashboardActivity : AppCompatActivity() {
     private lateinit var rvPrincipalApprovals: RecyclerView
     private lateinit var btnRefresh: Button
     private lateinit var btnViewMainStore: Button
-    private lateinit var btnViewSubStore: Button // Imeunganishwa kuwa moja kama Procurement
+    private lateinit var btnViewSubStore: Button
     private lateinit var btnFilterFinancialReport: Button
     private lateinit var btnTrackAllRequisitions: Button
     private lateinit var btnProcuredReport: Button
     private lateinit var btnIssuedReport: Button
     private lateinit var btnChangePassword: Button
+    private lateinit var btnViewFeedback: Button
 
     private var currentUserId: Int = 1
 
@@ -43,12 +44,13 @@ class PrincipalDashboardActivity : AppCompatActivity() {
         rvPrincipalApprovals = findViewById(R.id.rvPrincipalApprovals)
         btnRefresh = findViewById(R.id.btnRefresh)
         btnViewMainStore = findViewById(R.id.btnViewMainStore)
-        btnViewSubStore = findViewById(R.id.btnViewSubStore) // Imeunganishwa ID mpya ya XML
+        btnViewSubStore = findViewById(R.id.btnViewSubStore)
         btnFilterFinancialReport = findViewById(R.id.btnFilterFinancialReport)
         btnTrackAllRequisitions = findViewById(R.id.btnTrackAllRequisitions)
         btnProcuredReport = findViewById(R.id.btnProcuredReport)
         btnIssuedReport = findViewById(R.id.btnIssuedReport)
         btnChangePassword = findViewById(R.id.btnChangePassword)
+        btnViewFeedback = findViewById(R.id.btnViewFeedback)
 
         rvPrincipalApprovals.layoutManager = LinearLayoutManager(this)
 
@@ -61,7 +63,6 @@ class PrincipalDashboardActivity : AppCompatActivity() {
             showStockDialog("Stoo Kuu ya Chuo (Main Store)", isMainStore = true)
         }
 
-        // Muonekano mmoja wa SubStore unaofungua chaguo la Jikoni na Bar (Sawa na Procurement)
         btnViewSubStore.setOnClickListener {
             showUnifiedSubStoreChoiceDialog()
         }
@@ -86,6 +87,16 @@ class PrincipalDashboardActivity : AppCompatActivity() {
             showChangePasswordDialog()
         }
 
+        btnViewFeedback.setOnClickListener {
+            showCustomerFeedbackDialog()
+        }
+
+        fetchExecutiveReports()
+        fetchPendingFinalApprovals()
+    }
+
+    override fun onResume() {
+        super.onResume()
         fetchExecutiveReports()
         fetchPendingFinalApprovals()
     }
@@ -119,7 +130,82 @@ class PrincipalDashboardActivity : AppCompatActivity() {
         })
     }
 
-    // Kurekebisha Password ya Principal iweze kufanya kazi sawa na akaunti zingine
+    private fun showCustomerFeedbackDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("💬 Maoni na Tathmini za Wateja")
+
+        val scrollView = ScrollView(this)
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(40, 30, 40, 30)
+            setBackgroundColor(Color.parseColor("#1E293B"))
+        }
+
+        val tvLoading = TextView(this).apply {
+            text = "⏳ Inapakua maoni ya wateja..."
+            setTextColor(Color.WHITE)
+            textSize = 13f
+        }
+        layout.addView(tvLoading)
+
+        scrollView.addView(layout)
+        builder.setView(scrollView)
+        builder.setPositiveButton("FUNGA", null)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        val apiService = getRetrofit().create(ApiService::class.java)
+        apiService.getCustomerFeedback().enqueue(object : Callback<List<CustomerFeedbackItem>> {
+            override fun onResponse(
+                call: Call<List<CustomerFeedbackItem>>,
+                response: Response<List<CustomerFeedbackItem>>
+            ) {
+                layout.removeAllViews()
+                val feedbackList = response.body() ?: emptyList()
+
+                if (feedbackList.isEmpty()) {
+                    val tvEmpty = TextView(this@PrincipalDashboardActivity).apply {
+                        text = "Hakuna maoni ya wateja yaliyosajiliwa kwasasa."
+                        setTextColor(Color.WHITE)
+                        textSize = 14f
+                    }
+                    layout.addView(tvEmpty)
+                } else {
+                    for ((index, item) in feedbackList.withIndex()) {
+                        val name = item.customer_name ?: "Mteja"
+                        val rating = item.rating ?: "⭐⭐⭐⭐⭐"
+                        val comment = item.comment ?: "Hakuna maoni ya maandishi."
+                        val date = item.created_at ?: ""
+
+                        val tvCard = TextView(this@PrincipalDashboardActivity).apply {
+                            text = """
+                                ${index + 1}. 👤 $name ($rating)
+                                💬 "$comment"
+                                📅 $date
+                                ──────────────────────────
+                            """.trimIndent()
+                            setTextColor(Color.parseColor("#E2E8F0"))
+                            textSize = 13f
+                            setPadding(0, 6, 0, 6)
+                        }
+                        layout.addView(tvCard)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<CustomerFeedbackItem>>, t: Throwable) {
+                layout.removeAllViews()
+                val tvErr = TextView(this@PrincipalDashboardActivity).apply {
+                    text = "Hitilafu ya kupakua maoni: ${t.message}"
+                    setTextColor(Color.parseColor("#FEB2B2"))
+                    textSize = 13f
+                }
+                layout.addView(tvErr)
+            }
+        })
+    }
+
     private fun showChangePasswordDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("🔑 Badilisha Nenosiri (Password)")
@@ -176,7 +262,6 @@ class PrincipalDashboardActivity : AppCompatActivity() {
 
     private fun updatePasswordInServer(email: String, oldPass: String, newPass: String) {
         val apiService = getRetrofit().create(ApiService::class.java)
-        // Kutumia muundo sahihi wa kupokea email na password za zamani/mpya kama ilivyo kwenye system
         val requestData = hashMapOf<String, Any>(
             "email" to email,
             "old_password" to oldPass,
@@ -498,12 +583,21 @@ class PrincipalDashboardActivity : AppCompatActivity() {
                         tvReportDetails.text = """
                             📌 RIPOTI YA KIHASIBU$rangeInfo:
                             
-                            • Jumla ya Mauzo: TSH ${String.format("%,.0f", report.total_sales)}
-                            • 💵 Cash Total: TSH ${String.format("%,.0f", report.cash_sales)}
-                            • 📱 Lipa Namba: TSH ${String.format("%,.0f", report.lipanamba_sales)}
+                            • Jumla ya Mauzo: TZS ${String.format("%,.0f", report.total_sales)}
+                            • 💵 Cash Total: TZS ${String.format("%,.0f", report.cash_sales)}
+                            • 📱 Lipa Namba: TZS ${String.format("%,.0f", report.lipanamba_sales)}
                             • Idadi ya Oda: ${report.total_orders}
-                            • 🏦 Pesa Iliyokwenda Benki: TSH ${String.format("%,.0f", report.total_deposits)}
-                            • 💰 Balance (Iliyopo): TSH ${String.format("%,.0f", report.balance)}
+                            
+                            • 🏦 Pesa Iliyokwenda Benki: TZS ${String.format("%,.0f", report.total_deposits)}
+                            • 💰 Balance (Iliyopo): TZS ${String.format("%,.0f", report.balance)}
+                            
+                            ──────────────────────────
+                            📊 MCHANGANUO WA BENKI KWA IDARA:
+                            - 🍳 Breakfast: TZS ${String.format("%,.0f", report.breakfast_deposits)}
+                            - 🍲 Lunch: TZS ${String.format("%,.0f", report.lunch_deposits)}
+                            - 🍝 Dinner: TZS ${String.format("%,.0f", report.dinner_deposits)}
+                            - 🥤 Vinywaji/Bar: TZS ${String.format("%,.0f", report.drinks_deposits)}
+                            - 🏨 Vyumba na Kumbi: TZS ${String.format("%,.0f", report.rooms_deposits)}
                         """.trimIndent()
                     } else {
                         tvReportDetails.text = "Imeshindwa kupakua ripoti ya fedha."
@@ -769,7 +863,6 @@ class PrincipalDashboardActivity : AppCompatActivity() {
         btnFetch.setOnClickListener { loadIssueData(selectedStartDate, selectedEndDate) }
     }
 
-    // Njia ya Sub-Store Moja ambayo ikibonyezwa inafungua uchaguzi wa Jikoni au Bar (Inafanana na ya Procurement)
     private fun showUnifiedSubStoreChoiceDialog() {
         val options = arrayOf("🍲 Sub-Store Jikoni (Vyakula)", "🥤 Sub-Store Bar (Vinywaji)")
         val builder = AlertDialog.Builder(this)
@@ -793,16 +886,15 @@ class PrincipalDashboardActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     var stockList = response.body()!!
 
-                    // CHUJA HAPA ILI KUZUIA BIA KUTOKEA JIKONI NA VYAKULA KUTOKEA BAR
                     if (!isMainStore && department != null) {
                         stockList = stockList.filter { item ->
                             val itemName = (item.name ?: item.item_name ?: "").lowercase()
                             val isDrink = itemName.contains("bia") || itemName.contains("soda") || itemName.contains("maji") || itemName.contains("wine")
 
                             if (department.equals("Jikoni", ignoreCase = true)) {
-                                !isDrink // Jikoni ruhusu vyakula tu, ondoa vinywaji
+                                !isDrink
                             } else {
-                                isDrink  // Bar ruhusu vinywaji tu
+                                isDrink
                             }
                         }
                     }
@@ -813,7 +905,7 @@ class PrincipalDashboardActivity : AppCompatActivity() {
                     val layout = LinearLayout(this@PrincipalDashboardActivity).apply {
                         orientation = LinearLayout.VERTICAL
                         setPadding(40, 30, 40, 10)
-                        setBackgroundColor(Color.parseColor("#1E293B")) // Background ya kisasa ya giza kama ya Procurement
+                        setBackgroundColor(Color.parseColor("#1E293B"))
                     }
 
                     if (stockList.isEmpty()) {
@@ -827,7 +919,7 @@ class PrincipalDashboardActivity : AppCompatActivity() {
                             val tvItem = TextView(this@PrincipalDashboardActivity).apply {
                                 text = "• ${item.name ?: item.item_name}: ${item.quantity} ${item.unit}"
                                 textSize = 15f
-                                setTextColor(Color.WHITE) // Maandishi yawe meupe wazi
+                                setTextColor(Color.WHITE)
                                 setPadding(0, 8, 0, 8)
                             }
                             layout.addView(tvItem)
