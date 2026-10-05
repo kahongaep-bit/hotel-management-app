@@ -273,4 +273,10 @@ interface ApiService {
     @GET("api/feedback")
     fun getCustomerFeedback(): Call<List<CustomerFeedbackItem>>
 
+    @GET("api/stock/main")
+    fun getMainStock(): Call<List<StockItem>>
+
+    @GET("api/stock/sub")
+    fun getSubStock(@Query("department") department: String?): Call<List<StockItem>>
+
 }

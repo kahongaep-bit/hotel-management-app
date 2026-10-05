@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="14dp">
+            android:layout_marginBottom="10dp">
 
             <Button
                 android:id="@+id/btnFinanceRequisitions"
@@ -141,6 +141,36 @@
                 android:layout_weight="1"
                 android:backgroundTint="#4A5568"
                 android:text="📊 Ripoti za Kihasibu"
+                android:textSize="11sp"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <!-- VITUFE VIPYA VYA KUANGALIA STOO (MAIN STORE NA SUBSTORE) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="14dp">
+
+            <Button
+                android:id="@+id/btnViewMainStore"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#2E7D32"
+                android:text="📦 Stoo Kuu (Main)"
+                android:textSize="11sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnViewSubStore"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#1565C0"
+                android:text="🏬 Substore"
                 android:textSize="11sp"
                 android:layout_marginStart="4dp" />
         </LinearLayout>

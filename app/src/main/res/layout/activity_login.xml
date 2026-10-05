@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="VMCCC HOTEL SYSTEM"
+            android:text="HOTEL MANAGEMENT SYSTEM"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#233E6B"
+            app:cardBackgroundColor="#3361B0"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
             app:contentPadding="20dp">

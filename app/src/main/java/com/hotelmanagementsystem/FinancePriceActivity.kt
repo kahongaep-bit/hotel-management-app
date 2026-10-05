@@ -34,6 +34,8 @@ class FinancePriceActivity : AppCompatActivity() {
     private lateinit var rvFinanceProducts: RecyclerView
     private lateinit var btnFinanceRequisitions: Button
     private lateinit var btnViewFinancialReports: Button
+    private lateinit var btnViewMainStore: Button
+    private lateinit var btnViewSubStore: Button
 
     private lateinit var btnFilterAll: Button
     private lateinit var btnFilterFood: Button
@@ -72,6 +74,8 @@ class FinancePriceActivity : AppCompatActivity() {
         rvFinanceProducts = findViewById(R.id.rvFinanceProducts)
         btnFinanceRequisitions = findViewById(R.id.btnFinanceRequisitions)
         btnViewFinancialReports = findViewById(R.id.btnViewFinancialReports)
+        btnViewMainStore = findViewById(R.id.btnViewMainStore)
+        btnViewSubStore = findViewById(R.id.btnViewSubStore)
 
         btnFilterAll = findViewById(R.id.btnFilterAll)
         btnFilterFood = findViewById(R.id.btnFilterFood)
@@ -86,6 +90,10 @@ class FinancePriceActivity : AppCompatActivity() {
         tvFinanceBankDeposit.setOnClickListener { showFinancialReportDialog() }
 
         btnFinanceRequisitions.setOnClickListener { showPendingApprovalsDialog() }
+
+        // Vifungo vya Mhasibu kuangalia Stoo Kuu na Substore
+        btnViewMainStore.setOnClickListener { showMainStoreDialog() }
+        btnViewSubStore.setOnClickListener { showSubStoreDialog() }
 
         // Mabadiliko ya Spinner ili iwe na muonekano nadhifu, mpana na usiojibana
         val categories = arrayOf("Vyakula", "Vinywaji", "Chumba", "Ukumbi")
@@ -103,7 +111,7 @@ class FinancePriceActivity : AppCompatActivity() {
                 view.setTextColor(Color.parseColor("#1A202C"))
                 view.setBackgroundColor(Color.WHITE)
                 view.textSize = 14f
-                view.setPadding(24, 20, 24, 20) // Nafasi nzuri (padding) isiyobana maneno
+                view.setPadding(24, 20, 24, 20)
                 return view
             }
         }
@@ -202,6 +210,107 @@ class FinancePriceActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<List<MenuItem>>, t: Throwable) {}
+        })
+    }
+
+    private fun showMainStoreDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("📦 Stoo Kuu (Main Store)")
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(30, 20, 30, 20)
+        }
+
+        val tvLoading = TextView(this).apply {
+            text = "Inapakua bidhaa za Stoo Kuu..."
+            textSize = 14f
+            setPadding(10, 10, 10, 10)
+        }
+        layout.addView(tvLoading)
+
+        val listView = ListView(this)
+        layout.addView(listView)
+
+        builder.setView(layout)
+        builder.setPositiveButton("Funga", null)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        apiService.getMainStock().enqueue(object : Callback<List<StockItem>> {
+            override fun onResponse(call: Call<List<StockItem>>, response: Response<List<StockItem>>) {
+                if (isFinishing || isDestroyed) return
+                if (response.isSuccessful && response.body() != null) {
+                    val list = response.body()!!
+                    if (list.isEmpty()) {
+                        tvLoading.text = "Hakuna bidhaa kwenye Stoo Kuu kwa sasa."
+                    } else {
+                        tvLoading.visibility = View.GONE
+                        val displayList = list.map { "${it.item_name} — Qty: ${it.quantity} ${it.unit ?: ""}" }
+                        val arrayAdapter = ArrayAdapter(this@FinancePriceActivity, android.R.layout.simple_list_item_1, displayList)
+                        listView.adapter = arrayAdapter
+                    }
+                } else {
+                    tvLoading.text = "Imeshindwa kupakua Stoo Kuu."
+                }
+            }
+
+            override fun onFailure(call: Call<List<StockItem>>, t: Throwable) {
+                if (isFinishing || isDestroyed) return
+                tvLoading.text = "Hitilafu ya mtandao: ${t.message}"
+            }
+        })
+    }
+
+    private fun showSubStoreDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("🏬 Substore (Stoo Ndogo)")
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(30, 20, 30, 20)
+        }
+
+        val tvLoading = TextView(this).apply {
+            text = "Inapakua bidhaa za Substore..."
+            textSize = 14f
+            setPadding(10, 10, 10, 10)
+        }
+        layout.addView(tvLoading)
+
+        val listView = ListView(this)
+        layout.addView(listView)
+
+        builder.setView(layout)
+        builder.setPositiveButton("Funga", null)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        apiService.getSubStock(null).enqueue(object : Callback<List<StockItem>> {
+            override fun onResponse(call: Call<List<StockItem>>, response: Response<List<StockItem>>) {
+                if (isFinishing || isDestroyed) return
+                if (response.isSuccessful && response.body() != null) {
+                    val list = response.body()!!
+                    if (list.isEmpty()) {
+                        tvLoading.text = "Hakuna bidhaa kwenye Substore kwa sasa."
+                    } else {
+                        tvLoading.visibility = View.GONE
+                        // Ili kuondoa error ya department, tumia item_name, quantity na unit pekee
+                        val displayList = list.map { "${it.item_name} — Qty: ${it.quantity} ${it.unit ?: ""}" }
+                        val arrayAdapter = ArrayAdapter(this@FinancePriceActivity, android.R.layout.simple_list_item_1, displayList)
+                        listView.adapter = arrayAdapter
+                    }
+                } else {
+                    tvLoading.text = "Imeshindwa kupakua Substore."
+                }
+            }
+
+            override fun onFailure(call: Call<List<StockItem>>, t: Throwable) {
+                if (isFinishing || isDestroyed) return
+                tvLoading.text = "Hitilafu ya mtandao: ${t.message}"
+            }
         })
     }
 
